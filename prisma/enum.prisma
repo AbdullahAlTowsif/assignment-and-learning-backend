@@ -1,0 +1,16 @@
+enum Role {
+    STUDENT
+    INSTRUCTOR
+}
+
+enum Level {
+    BEGINNER
+    INTERMEDIATE
+    ADVANCED
+}
+
+enum Status {
+    PENDING
+    ACCEPTED
+    NEEDS_IMPROVEMENT
+}
