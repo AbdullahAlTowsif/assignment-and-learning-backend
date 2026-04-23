@@ -15,8 +15,8 @@ model Assignment {
 
 model Submission {
     id          String   @id @default(uuid())
-    taskUrl     String // Link to the work
-    taskNote    String // What they learned or comment
+    studentUrl     String // Link to the work
+    studentNote    String // What they learned or comment
     status      Status   @default(PENDING)
     submittedAt DateTime @default(now())
 

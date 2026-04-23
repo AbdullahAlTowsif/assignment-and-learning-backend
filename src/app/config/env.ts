@@ -6,7 +6,7 @@ interface EnvConfig {
     PORT: string;
     DATABASE_URL: string;
     NODE_ENV: "development" | "production";
-    // BCRYPT_SALT_ROUND: string;
+    BCRYPT_SALT_ROUND: string;
     // JWT_ACCESS_EXPIRES: string;
     // JWT_ACCESS_SECRET: string;
     // JWT_REFRESH_SECRET: string;
@@ -27,7 +27,7 @@ const loadEnvVariables = (): EnvConfig => {
         "PORT",
         "DATABASE_URL",
         "NODE_ENV",
-        // "BCRYPT_SALT_ROUND",
+        "BCRYPT_SALT_ROUND",
         // "JWT_ACCESS_EXPIRES",
         // "JWT_ACCESS_SECRET",
         // "ADMIN_EMAIL",
@@ -53,7 +53,7 @@ const loadEnvVariables = (): EnvConfig => {
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         DATABASE_URL: process.env.DATABASE_URL!,
         NODE_ENV: process.env.NODE_ENV as "development" | "production",
-        // BCRYPT_SALT_ROUND: process.env.BCRYPT_SALT_ROUND as string,
+        BCRYPT_SALT_ROUND: process.env.BCRYPT_SALT_ROUND as string,
         // JWT_ACCESS_SECRET: process.env.JWT_ACCESS_SECRET as string,
         // JWT_ACCESS_EXPIRES: process.env.JWT_ACCESS_EXPIRES as string,
         // JWT_REFRESH_SECRET: process.env.JWT_REFRESH_SECRET as string,
