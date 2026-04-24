@@ -4,6 +4,7 @@ import { AuthRoutes } from '../modules/auth/auth.routes';
 import { AssignmentRoutes } from '../modules/assignment/assignment.routes';
 import { SubmissionRoutes } from '../modules/submission/submission.routes';
 import { AnalyticsRoutes } from '../modules/analytics/analytics.routes';
+import { SmartRoutes } from '../modules/smart/smart.routes';
 
 
 const router = express.Router();
@@ -28,6 +29,10 @@ const moduleRoutes = [
     {
         path: '/analytics',
         route: AnalyticsRoutes
+    },
+    {
+        path: '/ai',
+        route: SmartRoutes
     },
 ];
 
