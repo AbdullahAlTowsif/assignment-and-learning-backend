@@ -3,7 +3,7 @@ import httpStatus from "http-status-codes";
 import { AuthServices } from "./auth.service";
 import catchAsync from "../../utils/catchAsync";
 import sendResponse from "../../utils/sendResponse";
-import { envVars } from "../../app/config/env";
+import { envVars } from "../../config/env";
 
 const loginUser = catchAsync(async (req: Request, res: Response) => {
     const accessTokenExpiresIn = envVars.JWT_ACCESS_EXPIRES as string;

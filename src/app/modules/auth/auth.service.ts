@@ -2,7 +2,7 @@ import * as bcrypt from 'bcryptjs';
 import { Secret } from "jsonwebtoken";
 import { prisma } from '../../utils/prisma';
 import { jwtHelper } from '../../middleware/jwtHelper';
-import { envVars } from '../../app/config/env';
+import { envVars } from '../../config/env';
 
 const loginUser = async (payload: {
     email: string,

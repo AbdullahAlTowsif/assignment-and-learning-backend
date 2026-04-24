@@ -2,7 +2,7 @@ import express, { Application, Request, Response } from 'express';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import { envVars } from './app/config/env';
-import router from './routes';
+import router from './app/routes';
 
 const app: Application = express();
 

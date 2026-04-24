@@ -1,8 +1,8 @@
 import * as bcrypt from 'bcryptjs';
 import { prisma } from "../../utils/prisma";
-import { envVars } from '../../app/config/env';
-import { Role, User } from '../../../prisma/generated/prisma/client';
 import { CreateUserInput } from './user.interface';
+import { Role, User } from '../../../../prisma/generated/prisma/browser';
+import { envVars } from '../../config/env';
 
 
 const createUser = async (req: { body: CreateUserInput }): Promise<User> => {
