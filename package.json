@@ -9,7 +9,7 @@
     "build": "tsc",
     "start": "node dist/src/server.js"
   },
-  "type": "module",
+  "type": "commonjs",
   "keywords": [],
   "author": "",
   "license": "ISC",
