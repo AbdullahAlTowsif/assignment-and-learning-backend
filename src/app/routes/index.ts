@@ -3,6 +3,7 @@ import { UserRoutes } from '../modules/user/user.routes';
 import { AuthRoutes } from '../modules/auth/auth.routes';
 import { AssignmentRoutes } from '../modules/assignment/assignment.routes';
 import { SubmissionRoutes } from '../modules/submission/submission.routes';
+import { AnalyticsRoutes } from '../modules/analytics/analytics.routes';
 
 
 const router = express.Router();
@@ -23,6 +24,10 @@ const moduleRoutes = [
     {
         path: '/submission',
         route: SubmissionRoutes
+    },
+    {
+        path: '/analytics',
+        route: AnalyticsRoutes
     },
 ];
 
