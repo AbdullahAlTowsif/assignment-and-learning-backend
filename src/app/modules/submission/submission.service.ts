@@ -107,8 +107,104 @@ const updateSubmission = async (
     return result;
 };
 
+const getSubmissionsByAssignment = async (
+    assignmentId: string,
+    instructorId: string
+) => {
+    // 🔍 ensure assignment belongs to instructor
+    const assignment = await prisma.assignment.findUnique({
+        where: { id: assignmentId },
+    });
+
+    if (!assignment) {
+        throw new Error("Assignment not found");
+    }
+
+    if (assignment.instructorId !== instructorId) {
+        throw new Error("Unauthorized");
+    }
+
+    const result = await prisma.submission.findMany({
+        where: { assignmentId },
+        include: {
+            student: {
+                select: {
+                    id: true,
+                    name: true,
+                    email: true,
+                },
+            },
+            feedback: true,
+        },
+        orderBy: {
+            submittedAt: "desc",
+        },
+    });
+
+    return result;
+};
+
+const reviewSubmission = async (
+    submissionId: string,
+    payload: { status: any; feedback: string },
+    instructorId: string
+) => {
+    const submission = await prisma.submission.findUnique({
+        where: { id: submissionId },
+        include: {
+            assignment: true,
+            feedback: true,
+        },
+    });
+
+    if (!submission) {
+        throw new Error("Submission not found");
+    }
+
+    // 🔐 ensure instructor owns the assignment
+    if (submission.assignment.instructorId !== instructorId) {
+        throw new Error("Unauthorized");
+    }
+
+    // 🔄 update submission status
+    await prisma.submission.update({
+        where: { id: submissionId },
+        data: {
+            status: payload.status,
+        },
+    });
+
+    let feedbackResult;
+
+    // 🧠 if feedback already exists → update
+    if (submission.feedback) {
+        feedbackResult = await prisma.feedback.update({
+            where: { submissionId: submissionId },
+            data: {
+                content: payload.feedback,
+            },
+        });
+    } else {
+        // ➕ create feedback
+        feedbackResult = await prisma.feedback.create({
+            data: {
+                content: payload.feedback,
+                submissionId: submissionId,
+                instructorId,
+            },
+        });
+    }
+
+    return {
+        message: "Submission reviewed successfully",
+        feedback: feedbackResult,
+    };
+};
+
 export const SubmissionService = {
     createSubmission,
     getMySubmissions,
     updateSubmission,
+    getSubmissionsByAssignment,
+    reviewSubmission,
 };

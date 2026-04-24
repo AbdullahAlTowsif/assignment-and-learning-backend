@@ -35,7 +35,7 @@ const updateSubmission = async (req: Request, res: Response) => {
     const id = req.params.id as string;
     const studentId = req.user?.id;
 
-    if(!id) {
+    if (!id) {
         throw new ApiError(httpStatus.BAD_REQUEST, "Student Id Not Found")
     }
 
@@ -52,8 +52,45 @@ const updateSubmission = async (req: Request, res: Response) => {
     });
 };
 
+const getSubmissionsByAssignment = async (req: Request, res: Response) => {
+    // const { assignmentId } = req.params;
+    const assignmentId = req.params.assignmentId as string;
+    const instructorId = req.user?.id;
+
+    const result = await SubmissionService.getSubmissionsByAssignment(
+        assignmentId,
+        instructorId
+    );
+
+    res.status(200).json({
+        success: true,
+        message: "Submissions fetched successfully",
+        data: result,
+    });
+};
+
+const reviewSubmission = async (req: Request, res: Response) => {
+    // const { id } = req.params; // submissionId
+    const id = req.params.id as string; // submissionId
+    const instructorId = req.user?.id;
+
+    const result = await SubmissionService.reviewSubmission(
+        id,
+        req.body,
+        instructorId
+    );
+
+    res.status(200).json({
+        success: true,
+        message: "Submission reviewed successfully",
+        data: result,
+    });
+};
+
 export const SubmissionController = {
     createSubmission,
     getMySubmissions,
     updateSubmission,
+    getSubmissionsByAssignment,
+    reviewSubmission,
 };
